@@ -22442,6 +22442,10 @@ video {
           animation: bounce 1s infinite;
 }
 
+.ap-footer svg {
+  display: inline;
+}
+
 @media (min-width: 640px) {
   .sm\:container {
     width: 100%;
