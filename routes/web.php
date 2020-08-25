@@ -26,3 +26,25 @@ Route::get('/', function () {
         'location' => $location,
     ]);
 });
+
+Route::get('/weather', function () {
+    $location = request()->location ? request()->location : 'Toronto, Canada';
+    $apiKey = config('services.openweather.key');
+
+    $response = Http::get("https://api.openweathermap.org/data/2.5/weather?q={$location}&appid={$apiKey}&units=metric");
+
+    return response()->json($response->json(), 200);
+});
+
+Route::get('/future-weather', function () {
+    $location = request()->location ? request()->location : 'Toronto, Canada';
+    $apiKey = config('services.openweather.key');
+
+    $responseFuture = Http::get("https://api.openweathermap.org/data/2.5/forecast/daily?q={$location}&cnt=5&appid={$apiKey}&units=metric");
+
+    return response()->json($responseFuture->json(), 200);
+});
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
